@@ -8,8 +8,6 @@ import traceback
 
 from motor import motor_asyncio
 
-from . import MongoCollectionFactory
-
 
 class _BaseHandler:
     def __init__(

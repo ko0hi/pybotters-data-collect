@@ -161,8 +161,6 @@ if __name__ == '__main__':
 
     parser = ArgumentParser()
     parser.add_argument("--exchange", choices=["bybit", "binance", "ftx", "phemex", "gmo", "bitget", "okx", "bitflyer", "coincheck"], required=True)
-    parser.add_argument("--log")
-
     args = parser.parse_args()
 
     try:

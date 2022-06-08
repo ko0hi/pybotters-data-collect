@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "pybotters-data-collect"
+version = "0.1.0"
+description = ""
+authors = ["ko0hi <ko0hi.4731@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+loguru = "^0.6.0"
+pybotters = "^0.13.0"
+motor = "^3.0.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -11,9 +11,9 @@ from motor import motor_asyncio
 
 class _BaseHandler:
     def __init__(
-            self,
-            produce_fn: Callable[[dict[str, Any], Any], list[dict]],
-            logger: logging.Logger = None
+        self,
+        produce_fn: Callable[[dict[str, Any], Any], list[dict]],
+        logger: logging.Logger = None,
     ):
         self._produce_fn = produce_fn
         self._logger = logger or loguru.logger
@@ -43,20 +43,22 @@ class _BaseHandler:
 
 class MongoHandler(_BaseHandler):
     def __init__(
-            self,
-            produce_fn: Callable[[dict[str, Any], Any], list[dict]] = None,
-            *,
-            collection: 'motor.motor_asyncio.AsyncIOMotorCollection' = None,
-            db_name: str = None,
-            collection_name: str = None,
-            logger: logging.Logger = None
+        self,
+        produce_fn: Callable[[dict[str, Any], Any], list[dict]] = None,
+        *,
+        collection: "motor.motor_asyncio.AsyncIOMotorCollection" = None,
+        db_name: str = None,
+        collection_name: str = None,
+        logger: logging.Logger = None,
     ):
         super(MongoHandler, self).__init__(produce_fn, logger)
 
         if collection is not None:
             self._collection = collection
         else:
-            self._collection = self.create_collection(db_name=db_name, collection_name=collection_name)
+            self._collection = self.create_collection(
+                db_name=db_name, collection_name=collection_name
+            )
 
     async def _consume(self, data: list[dict]):
         try:
@@ -70,15 +72,15 @@ class MongoHandler(_BaseHandler):
 
     @classmethod
     def create_collection(
-            cls,
-            *,
-            host='localhost',
-            port=27017,
-            db_name=None,
-            collection_name=None,
-            indexes=None,
-            uniq_index=False,
-            background_indexing=True,
+        cls,
+        *,
+        host="localhost",
+        port=27017,
+        db_name=None,
+        collection_name=None,
+        indexes=None,
+        uniq_index=False,
+        background_indexing=True,
     ):
         assert db_name is not None
         assert collection_name is not None
@@ -88,6 +90,8 @@ class MongoHandler(_BaseHandler):
 
         if indexes is not None:
             # https://motor.readthedocs.io/en/stable/api-asyncio/asyncio_motor_collection.html?highlight=index#motor.motor_asyncio.AsyncIOMotorCollection.create_index
-            collection.create_index(indexes, unique=uniq_index, background=background_indexing)
+            collection.create_index(
+                indexes, unique=uniq_index, background=background_indexing
+            )
 
         return collection

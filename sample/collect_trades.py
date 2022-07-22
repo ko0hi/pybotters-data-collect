@@ -206,7 +206,7 @@ async def main(exchange):
                             ]
 
                         board["timestamp"] = str(datetime.utcnow())
-                        board["mid"] = cls.STORE.board.mid_price
+                        board["mid"] = int(cls.STORE.board.mid_price["FX_BTC_JPY"])
                         cls.LAST_INSERT = time.monotonic()
                         return [board]
                     else:
